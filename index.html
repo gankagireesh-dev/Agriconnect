@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Farmer Marketplace and Advisory Portal – Empowering Farmers Through Technology</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Logo definition (reused in header, hero and footer) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="logo-symbol" viewBox="0 0 64 64">
+      <circle cx="32" cy="32" r="30" fill="#2e7d32"/>
+      <circle cx="32" cy="20" r="8" fill="#f9a825"/>
+      <path d="M3 44 Q18 34 32 42 T61 42 A30 30 0 0 1 32 62 A30 30 0 0 1 3 44Z" fill="#a5d6a7"/>
+      <path d="M32 58 V26" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/>
+      <g fill="#ffffff">
+        <ellipse cx="32" cy="24" rx="2.4" ry="4.5"/>
+        <ellipse cx="27" cy="31" rx="4.5" ry="2.1" transform="rotate(-35 27 31)"/>
+        <ellipse cx="37" cy="31" rx="4.5" ry="2.1" transform="rotate(35 37 31)"/>
+        <ellipse cx="27" cy="38" rx="4.5" ry="2.1" transform="rotate(-35 27 38)"/>
+        <ellipse cx="37" cy="38" rx="4.5" ry="2.1" transform="rotate(35 37 38)"/>
+        <ellipse cx="27" cy="45" rx="4.5" ry="2.1" transform="rotate(-35 27 45)"/>
+        <ellipse cx="37" cy="45" rx="4.5" ry="2.1" transform="rotate(35 37 45)"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<header id="site-header">
+  <div class="container header-inner">
+    <svg class="logo" id="header-logo" role="img" aria-label="Farmer Marketplace logo"><use href="#logo-symbol"/></svg>
+    <div class="brand-text">
+      <h1 id="site-title">Farmer Marketplace and Advisory Portal</h1>
+      <p id="site-tagline">Empowering Farmers Through Technology</p>
+    </div>
+    <div id="header-user" class="header-user" hidden></div>
+  </div>
+</header>
+
+<!-- ============ NAVIGATION ============ -->
+<nav id="main-nav" aria-label="Main navigation">
+  <div class="container nav-inner">
+    <button type="button" id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="nav-list">☰ Menu</button>
+    <ul id="nav-list" class="nav-list">
+      <li data-visible="all"><a href="#" id="nav-home" data-nav="home">🏠 Home</a></li>
+      <li data-visible="public"><a href="#" id="nav-register" data-nav="register">📝 Register</a></li>
+      <li data-visible="public"><a href="#" id="nav-login" data-nav="login">🔑 Login</a></li>
+      <li data-visible="private"><a href="#" id="nav-dashboard" data-nav="dashboard">📊 Dashboard</a></li>
+      <li data-visible="private"><a href="#" id="nav-marketplace" data-nav="marketplace">🛒 Marketplace</a></li>
+      <li data-visible="private"><a href="#" id="nav-cart" data-nav="cart">🧺 Cart <span id="cart-badge" class="badge">0</span></a></li>
+      <li data-visible="private"><a href="#" id="nav-advisory" data-nav="advisory">🌱 Advisory</a></li>
+      <li data-visible="private"><a href="#" id="nav-tracking" data-nav="tracking">🚚 Tracking</a></li>
+      <li data-visible="private"><a href="#" id="nav-feedback" data-nav="feedback">⭐ Feedback</a></li>
+      <li data-visible="private"><a href="#" id="nav-profile" data-nav="profile">👤 Profile</a></li>
+      <li data-visible="private"><a href="#" id="nav-logout" data-action="logout">🚪 Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div id="toast-container" aria-live="polite"></div>
+
+<main id="app-main">
+
+<!-- ============ HOME ============ -->
+<section id="page-home" class="page">
+  <div class="hero">
+    <div class="container hero-inner">
+      <svg class="logo logo-large" id="hero-logo" role="img" aria-label="Portal logo"><use href="#logo-symbol"/></svg>
+      <h2 id="hero-title">Farmer Marketplace and Advisory Portal</h2>
+      <p class="hero-tagline" id="hero-tagline">Empowering Farmers Through Technology</p>
+      <p class="hero-welcome" id="hero-welcome">🌾 Welcome, farmers! Sell your harvest, buy what you need and learn better farming practices – all in one place.</p>
+      <div id="home-guest-actions" class="hero-actions">
+        <button type="button" id="home-btn-register" class="btn btn-accent btn-lg" data-nav="register">📝 Register</button>
+        <button type="button" id="home-btn-login" class="btn btn-light btn-lg" data-nav="login">🔑 Login</button>
+      </div>
+      <div id="home-user-actions" class="hero-actions" hidden>
+        <button type="button" id="home-btn-dashboard" class="btn btn-accent btn-lg" data-nav="dashboard">📊 Go to Dashboard</button>
+        <button type="button" id="home-btn-market" class="btn btn-light btn-lg" data-nav="marketplace">🛒 Open Marketplace</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container section">
+    <div class="card intro-card" id="home-intro">
+      <h2>About the Portal</h2>
+      <p>The Farmer Marketplace and Advisory Portal is a simple online platform that helps farmers list their produce, buy farm products, get practical agricultural guidance and track every order from placement to delivery. It brings buyers and sellers together without middlemen and puts useful farming knowledge one click away.</p>
+    </div>
+
+    <h2 class="section-title" id="features-title">Main Features</h2>
+    <div class="grid grid-4" id="features-grid">
+      <div class="card feature" id="feature-auth"><div class="feature-icon">🔐</div><h3>Secure Access</h3><p>Farmer registration and login with validated forms and protected pages.</p></div>
+      <div class="card feature" id="feature-market"><div class="feature-icon">🥕</div><h3>Produce Marketplace</h3><p>List your crops with price and stock, and browse products from other farmers.</p></div>
+      <div class="card feature" id="feature-cart"><div class="feature-icon">🧺</div><h3>Smart Cart</h3><p>Add or remove items, with live totals and automatic stock checks.</p></div>
+      <div class="card feature" id="feature-payment"><div class="feature-icon">💳</div><h3>Flexible Payment</h3><p>Cash on Delivery, UPI (demo) and Card (demo) – no real money involved.</p></div>
+      <div class="card feature" id="feature-advisory"><div class="feature-icon">🌱</div><h3>Agricultural Advisory</h3><p>Tips on crop selection, soil, irrigation, fertilizers, pests and seasons.</p></div>
+      <div class="card feature" id="feature-tracking"><div class="feature-icon">🚚</div><h3>Order Tracking</h3><p>Follow orders from Processing to Shipped to Delivered.</p></div>
+      <div class="card feature" id="feature-feedback"><div class="feature-icon">⭐</div><h3>Feedback</h3><p>Rate your delivered orders and share your experience.</p></div>
+      <div class="card feature" id="feature-profile"><div class="feature-icon">👤</div><h3>Farmer Profile</h3><p>View your profile details and activity summary at any time.</p></div>
+    </div>
+
+    <h2 class="section-title" id="steps-title">How It Works</h2>
+    <div class="grid grid-4" id="steps-grid">
+      <div class="card step" id="step-1"><span class="step-no">1</span><h3>Register</h3><p>Create your free farmer account.</p></div>
+      <div class="card step" id="step-2"><span class="step-no">2</span><h3>List or Browse</h3><p>Add your produce or explore the marketplace.</p></div>
+      <div class="card step" id="step-3"><span class="step-no">3</span><h3>Cart &amp; Pay</h3><p>Choose a payment method and place the order.</p></div>
+      <div class="card step" id="step-4"><span class="step-no">4</span><h3>Track &amp; Review</h3><p>Track delivery and share your feedback.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REGISTER (Module 1) ============ -->
+<section id="page-register" class="page">
+  <div class="container section narrow">
+    <div class="card form-card" id="register-card">
+      <h2>📝 Farmer Registration</h2>
+      <p class="muted">Create your account to start selling and buying.</p>
+      <div id="reg-message" class="message" role="alert" hidden></div>
+      <form id="register-form" novalidate>
+        <div class="form-group">
+          <label for="reg-name">Farmer Name</label>
+          <input type="text" id="reg-name" placeholder="e.g. Ravi Kumar" autocomplete="name">
+          <span class="field-error" id="err-reg-name"></span>
+        </div>
+        <div class="form-group">
+          <label for="reg-mobile">Mobile Number</label>
+          <input type="tel" id="reg-mobile" placeholder="10-digit number starting with 6-9" maxlength="10" inputmode="numeric" autocomplete="tel">
+          <span class="field-error" id="err-reg-mobile"></span>
+        </div>
+        <div class="form-group">
+          <label for="reg-username">Username</label>
+          <input type="text" id="reg-username" placeholder="4-20 letters, numbers or _" autocomplete="username">
+          <span class="field-error" id="err-reg-username"></span>
+        </div>
+        <div class="form-group">
+          <label for="reg-password">Password</label>
+          <input type="password" id="reg-password" placeholder="At least 6 characters" autocomplete="new-password">
+          <span class="field-error" id="err-reg-password"></span>
+        </div>
+        <div class="form-group">
+          <label for="reg-confirm">Confirm Password</label>
+          <input type="password" id="reg-confirm" placeholder="Re-enter password" autocomplete="new-password">
+          <span class="field-error" id="err-reg-confirm"></span>
+        </div>
+        <button type="submit" id="reg-submit" class="btn btn-primary btn-block">Create Account</button>
+      </form>
+      <p class="form-switch">Already registered? <a href="#" id="reg-to-login" data-nav="login">Login here</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOGIN (Module 1) ============ -->
+<section id="page-login" class="page">
+  <div class="container section narrow">
+    <div class="card form-card" id="login-card">
+      <h2>🔑 Farmer Login</h2>
+      <p class="muted">Welcome back! Please sign in to continue.</p>
+      <div id="login-message" class="message" role="alert" hidden></div>
+      <form id="login-form" novalidate>
+        <div class="form-group">
+          <label for="login-username">Username</label>
+          <input type="text" id="login-username" placeholder="Enter your username" autocomplete="username">
+          <span class="field-error" id="err-login-username"></span>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" placeholder="Enter your password" autocomplete="current-password">
+          <span class="field-error" id="err-login-password"></span>
+        </div>
+        <button type="submit" id="login-submit" class="btn btn-primary btn-block">Login</button>
+      </form>
+      <p class="form-switch">New here? <a href="#" id="login-to-register" data-nav="register">Create an account</a></p>
+      <div class="demo-box" id="demo-credentials">
+        <strong>Demo accounts</strong><br>
+        <code>farmer1</code> / <code>Farmer@123</code> &nbsp;|&nbsp; <code>farmer2</code> / <code>Farmer@123</code>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DASHBOARD ============ -->
+<section id="page-dashboard" class="page">
+  <div class="container section">
+    <div class="card welcome-card" id="dash-welcome">
+      <h2 id="dash-welcome-text">Welcome</h2>
+      <p class="muted">Here is a quick summary of your activity on the portal.</p>
+    </div>
+    <div class="grid grid-4" id="dash-stats"></div>
+    <h2 class="section-title">Quick Navigation</h2>
+    <div class="grid grid-4" id="dash-modules">
+      <button type="button" id="dash-mod-1" class="card module-card" data-nav="profile">
+        <span class="module-icon">🔐</span><strong>Module 1</strong><span>Registration &amp; Login<br><small>View your profile</small></span>
+      </button>
+      <button type="button" id="dash-mod-2" class="card module-card" data-nav="marketplace">
+        <span class="module-icon">🛒</span><strong>Module 2</strong><span>Produce Marketplace<br><small>List &amp; buy products</small></span>
+      </button>
+      <button type="button" id="dash-mod-3" class="card module-card" data-nav="advisory">
+        <span class="module-icon">🌱</span><strong>Module 3</strong><span>Agricultural Advisory<br><small>Farming guidance</small></span>
+      </button>
+      <button type="button" id="dash-mod-4" class="card module-card" data-nav="tracking">
+        <span class="module-icon">🚚</span><strong>Module 4</strong><span>Tracking &amp; Feedback<br><small>Orders and ratings</small></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARKETPLACE (Module 2) ============ -->
+<section id="page-marketplace" class="page">
+  <div class="container section">
+    <h2 class="page-title">🛒 Produce Marketplace</h2>
+
+    <div class="card form-card wide" id="product-form-card">
+      <h3>➕ List Your Produce</h3>
+      <div id="product-message" class="message" role="alert" hidden></div>
+      <form id="product-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="prod-name">Product Name</label>
+            <input type="text" id="prod-name" placeholder="e.g. Fresh Tomatoes">
+            <span class="field-error" id="err-prod-name"></span>
+          </div>
+          <div class="form-group">
+            <label for="prod-category">Category</label>
+            <select id="prod-category">
+              <option value="">-- Select category --</option>
+              <option value="Vegetables">Vegetables</option>
+              <option value="Fruits">Fruits</option>
+              <option value="Grains">Grains</option>
+              <option value="Pulses">Pulses</option>
+              <option value="Dairy">Dairy</option>
+              <option value="Spices">Spices</option>
+              <option value="Other">Other</option>
+            </select>
+            <span class="field-error" id="err-prod-category"></span>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="prod-qty">Quantity (kg)</label>
+            <input type="number" id="prod-qty" min="1" step="1" placeholder="e.g. 100">
+            <span class="field-error" id="err-prod-qty"></span>
+          </div>
+          <div class="form-group">
+            <label for="prod-price">Price per kg (₹)</label>
+            <input type="number" id="prod-price" min="0.5" step="0.5" placeholder="e.g. 30">
+            <span class="field-error" id="err-prod-price"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="prod-desc">Description</label>
+          <textarea id="prod-desc" rows="3" maxlength="300" placeholder="Describe quality, variety, harvest date..."></textarea>
+          <span class="field-error" id="err-prod-desc"></span>
+        </div>
+        <button type="submit" id="prod-submit" class="btn btn-primary">Add Product</button>
+      </form>
+    </div>
+
+    <div class="toolbar" id="market-toolbar">
+      <h3 id="market-count">Available Products</h3>
+      <div class="toolbar-controls">
+        <label class="sr-only" for="market-search">Search products</label>
+        <input type="search" id="market-search" placeholder="🔍 Search products...">
+        <label class="sr-only" for="market-category">Filter by category</label>
+        <select id="market-category">
+          <option value="all">All categories</option>
+          <option value="Vegetables">Vegetables</option>
+          <option value="Fruits">Fruits</option>
+          <option value="Grains">Grains</option>
+          <option value="Pulses">Pulses</option>
+          <option value="Dairy">Dairy</option>
+          <option value="Spices">Spices</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </div>
+    <div id="market-message" class="message" role="alert" hidden></div>
+    <div class="grid grid-products" id="product-grid"></div>
+  </div>
+</section>
+
+<!-- ============ CART ============ -->
+<section id="page-cart" class="page">
+  <div class="container section">
+    <h2 class="page-title">🧺 Shopping Cart</h2>
+    <div id="cart-message" class="message" role="alert" hidden></div>
+    <div id="cart-content"></div>
+  </div>
+</section>
+
+<!-- ============ PAYMENT ============ -->
+<section id="page-payment" class="page">
+  <div class="container section">
+    <h2 class="page-title">💳 Payment</h2>
+    <div class="payment-layout">
+      <div class="card" id="payment-summary-card">
+        <h3>Order Summary</h3>
+        <div id="payment-summary"></div>
+      </div>
+      <div class="card" id="payment-method-card">
+        <h3>Select Payment Method</h3>
+        <div id="payment-message" class="message" role="alert" hidden></div>
+        <div class="pay-options" id="payment-methods">
+          <label class="pay-option" for="pay-cod" id="label-pay-cod">
+            <input type="radio" name="payment-method" id="pay-cod" value="cod" checked>
+            <span class="pay-icon">💵</span><span><strong>Cash on Delivery (COD)</strong><br><small>Pay when the order arrives</small></span>
+          </label>
+          <label class="pay-option" for="pay-upi" id="label-pay-upi">
+            <input type="radio" name="payment-method" id="pay-upi" value="upi">
+            <span class="pay-icon">📱</span><span><strong>UPI (Demo)</strong><br><small>Simulated payment – no UPI ID or PIN needed</small></span>
+          </label>
+          <label class="pay-option" for="pay-card" id="label-pay-card">
+            <input type="radio" name="payment-method" id="pay-card" value="card">
+            <span class="pay-icon">💳</span><span><strong>Card Payment (Demo)</strong><br><small>Simulated payment – no card number or CVV needed</small></span>
+          </label>
+        </div>
+        <div class="demo-box" id="payment-info"></div>
+        <p class="muted small">🔒 This is a demo. No real transaction is processed and no payment credentials are collected.</p>
+        <div class="btn-row">
+          <button type="button" id="pay-back" class="btn btn-outline" data-nav="cart">← Back to Cart</button>
+          <button type="button" id="pay-btn" class="btn btn-primary" data-action="confirm-payment">Confirm &amp; Place Order</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ORDER CONFIRMATION ============ -->
+<section id="page-confirmation" class="page">
+  <div class="container section narrow-lg">
+    <div class="card confirm-card" id="confirm-card"></div>
+  </div>
+</section>
+
+<!-- ============ ADVISORY (Module 3) ============ -->
+<section id="page-advisory" class="page">
+  <div class="container section">
+    <h2 class="page-title">🌱 Agricultural Advisory</h2>
+    <p class="muted">Practical guidance to help you grow healthier crops and better income.</p>
+    <div class="grid grid-3" id="advisory-grid">
+      <article class="card advice" id="adv-crop">
+        <div class="advice-icon">🌾</div><h3>Crop Selection</h3>
+        <ul>
+          <li>Choose crops that suit your local climate, rainfall and soil type.</li>
+          <li>Check market demand and price trends before planting.</li>
+          <li>Use certified, disease-free and high-yield seed varieties.</li>
+          <li>Rotate cereals with pulses to keep soil fertile.</li>
+        </ul>
+      </article>
+      <article class="card advice" id="adv-soil">
+        <div class="advice-icon">🪱</div><h3>Soil Preparation</h3>
+        <ul>
+          <li>Test your soil every 2-3 years for pH and nutrients.</li>
+          <li>Plough deeply after harvest and let the field sun-dry.</li>
+          <li>Mix well-rotted farmyard manure or compost before sowing.</li>
+          <li>Level the field for even water distribution.</li>
+        </ul>
+      </article>
+      <article class="card advice" id="adv-irrigation">
+        <div class="advice-icon">💧</div><h3>Irrigation Methods</h3>
+        <ul>
+          <li>Drip irrigation saves up to 50% water and suits vegetables and orchards.</li>
+          <li>Sprinklers work well for pulses, cereals and uneven land.</li>
+          <li>Water early morning or evening to reduce evaporation.</li>
+          <li>Avoid over-watering – it causes root rot and nutrient loss.</li>
+        </ul>
+      </article>
+      <article class="card advice" id="adv-fertilizer">
+        <div class="advice-icon">🧪</div><h3>Fertilizers</h3>
+        <ul>
+          <li>Apply fertilizers based on soil-test recommendations.</li>
+          <li>Balance nitrogen (N), phosphorus (P) and potassium (K).</li>
+          <li>Combine organic manure with chemical fertilizers for lasting fertility.</li>
+          <li>Split nitrogen doses across crop stages to reduce wastage.</li>
+        </ul>
+      </article>
+      <article class="card advice" id="adv-pest">
+        <div class="advice-icon">🐛</div><h3>Pest Management</h3>
+        <ul>
+          <li>Inspect fields weekly to spot pests and diseases early.</li>
+          <li>Use neem-based sprays, pheromone and sticky traps first.</li>
+          <li>Encourage helpful insects such as ladybirds and spiders.</li>
+          <li>Use chemical pesticides only when needed, in the right dose.</li>
+        </ul>
+      </article>
+      <article class="card advice" id="adv-seasonal">
+        <div class="advice-icon">📅</div><h3>Seasonal Farming Tips</h3>
+        <ul>
+          <li><strong>Kharif (Jun-Oct):</strong> rice, maize, cotton, groundnut – ensure good drainage.</li>
+          <li><strong>Rabi (Nov-Mar):</strong> wheat, mustard, gram – plan irrigation carefully.</li>
+          <li><strong>Zaid (Mar-Jun):</strong> watermelon, cucumber, fodder – protect from heat.</li>
+          <li>Follow weather forecasts before sowing and harvesting.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRACKING (Module 4) ============ -->
+<section id="page-tracking" class="page">
+  <div class="container section">
+    <h2 class="page-title">🚚 Order Tracking</h2>
+    <div class="toolbar" id="track-toolbar">
+      <p class="muted" id="track-hint">Status flow: Processing → Shipped → Delivered. Use the demo button to move an order forward.</p>
+      <div class="toolbar-controls">
+        <label class="sr-only" for="track-search">Search by order ID</label>
+        <input type="search" id="track-search" placeholder="🔍 Search by Order ID">
+      </div>
+    </div>
+    <div id="track-message" class="message" role="alert" hidden></div>
+    <div id="tracking-list"></div>
+  </div>
+</section>
+
+<!-- ============ FEEDBACK (Module 4) ============ -->
+<section id="page-feedback" class="page">
+  <div class="container section">
+    <h2 class="page-title">⭐ Feedback</h2>
+    <div class="card form-card wide" id="feedback-card">
+      <h3>Rate Your Delivered Order</h3>
+      <div id="fb-message" class="message" role="alert" hidden></div>
+      <div id="fb-empty" class="demo-box" hidden>Feedback can be submitted after an order is <strong>Delivered</strong>. Go to Tracking and advance an order to Delivered to try it.</div>
+      <form id="feedback-form" novalidate>
+        <div class="form-group">
+          <label for="fb-order">Select Delivered Order</label>
+          <select id="fb-order"></select>
+          <span class="field-error" id="err-fb-order"></span>
+        </div>
+        <div class="form-group">
+          <span class="label-like" id="fb-rating-label">Rating (1-5 stars)</span>
+          <div class="stars" id="fb-stars" role="group" aria-labelledby="fb-rating-label">
+            <button type="button" class="star" id="fb-star-1" data-action="star" data-value="1" aria-label="1 star">★</button>
+            <button type="button" class="star" id="fb-star-2" data-action="star" data-value="2" aria-label="2 stars">★</button>
+            <button type="button" class="star" id="fb-star-3" data-action="star" data-value="3" aria-label="3 stars">★</button>
+            <button type="button" class="star" id="fb-star-4" data-action="star" data-value="4" aria-label="4 stars">★</button>
+            <button type="button" class="star" id="fb-star-5" data-action="star" data-value="5" aria-label="5 stars">★</button>
+            <span id="fb-star-text" class="star-text">Not rated</span>
+          </div>
+          <span class="field-error" id="err-fb-rating"></span>
+        </div>
+        <div class="form-group">
+          <label for="fb-text">Feedback Message</label>
+          <textarea id="fb-text" rows="4" maxlength="500" placeholder="Tell us about the quality, delivery and your experience..."></textarea>
+          <span class="field-error" id="err-fb-text"></span>
+        </div>
+        <button type="submit" id="fb-submit" class="btn btn-primary">Submit Feedback</button>
+      </form>
+    </div>
+    <h3 class="section-title" id="fb-history-title">Your Previous Feedback</h3>
+    <div id="fb-list"></div>
+  </div>
+</section>
+
+<!-- ============ PROFILE ============ -->
+<section id="page-profile" class="page">
+  <div class="container section narrow">
+    <div class="card profile-card" id="profile-card"></div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer id="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <svg class="logo logo-small" id="footer-logo" role="img" aria-label="Portal logo"><use href="#logo-symbol"/></svg>
+      <div>
+        <strong>Farmer Marketplace and Advisory Portal</strong><br>
+        <small>Empowering Farmers Through Technology</small>
+      </div>
+    </div>
+    <div class="footer-info">
+      <p>College Project – Frontend-only web application built with HTML, CSS and JavaScript.</p>
+      <p>Data is stored in your browser (localStorage / sessionStorage). Payments are demo only.</p>
+      <p><button type="button" id="reset-demo" class="link-btn" data-action="reset-demo">Reset demo data</button></p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
